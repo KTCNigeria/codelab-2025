@@ -2,9 +2,96 @@
 In this session, you will be building a website where you can search for and see a lot of superheroes and information about them. This is a fun project you can build an dshow to your friends, and we'll be building it together.
 
 ### Requirements
-1. Create a replit account at ![replit.com](https://replit.com)
-   ![image](https://github.com/user-attachments/assets/c7b5b1de-3b97-43f6-863d-982a521842e7)
-2.  Create a Repl
-   <img width="1247" alt="image" src="https://github.com/user-attachments/assets/07e499fa-7cc4-40cb-ad86-ba838c41bf64" />
-3. Search for and select React Javascript
-   ![image](https://github.com/user-attachments/assets/d2887847-23ca-47d2-9c2d-67185eb2ce10)
+1. Create a github account (github.com)
+2. Get an access token from superhero API (superheroapi.com)
+3. Create a Codepen account (codepen.io)
+4. Paste in this code
+   
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Superhero Search</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 2rem;
+      background: #f5f5f5;
+    }
+    input {
+      padding: 0.5rem;
+      width: 250px;
+    }
+    button {
+      padding: 0.5rem;
+      margin-left: 0.5rem;
+    }
+    .card {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 6px;
+    }
+    .stats {
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Search for a Superhero</h2>
+  <input type="text" id="heroName" placeholder="Enter superhero name" />
+  <button onclick="searchHero()">Search</button>
+
+  <div id="result" class="card" style="display: none;">
+    <h3 id="name"></h3>
+    <img id="image" src="" alt="Superhero Image" />
+    <div class="stats">
+      <p><strong>Intelligence:</strong> <span id="intelligence"></span></p>
+      <p><strong>Strength:</strong> <span id="strength"></span></p>
+      <p><strong>Speed:</strong> <span id="speed"></span></p>
+      <p><strong>Power:</strong> <span id="power"></span></p>
+    </div>
+  </div>
+
+  <script>
+    const token = "68991e742e4cda24326eebb6c875fe1a";
+
+    async function searchHero() {
+      const name = document.getElementById("heroName").value.trim();
+      if (!name) return;
+
+      const response = await fetch(`https://www.superheroapi.com/api.php/${token}/search/${name}`);
+      const data = await response.json();
+
+      if (data.response === "success") {
+        const hero = data.results[0];
+        document.getElementById("name").textContent = hero.name;
+        document.getElementById("image").src = hero.image.url;
+        document.getElementById("intelligence").textContent = hero.powerstats.intelligence;
+        document.getElementById("strength").textContent = hero.powerstats.strength;
+        document.getElementById("speed").textContent = hero.powerstats.speed;
+        document.getElementById("power").textContent = hero.powerstats.power;
+        document.getElementById("result").style.display = "block";
+      } else {
+        alert("Superhero not found.");
+      }
+    }
+  </script>
+
+</body>
+</html>
+</body>
+
+```
+
+</code>
+
+
