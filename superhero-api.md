@@ -92,6 +92,9 @@ In this session, you will be building a website where you can search for and see
 
 ```
 
+```
+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
+```
 </code>
 
 
